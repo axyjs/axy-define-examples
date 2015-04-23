@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+    <style>
+    .logdiv {
+        background-color: white;
+        border: 1px solid black; 
+        padding: 2px; 
+        width: 1000px; 
+        height: 250px; 
+        overflow: scroll;
+    }
+    </style>
+</head>
+<body>
+    <p>Console:
+    <pre id="con">&gt;</pre>
+    <div id="log" class="logdiv">
+    </div>
+    <div id="log2" class="logdiv">
+    </div>    
+    <script>
+        if (!Array.prototype.map) {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.1/es5-shim.min.js"></' + 'script>');
+        }
+        if (typeof JSON === "undefined") {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20140204/json2.min.js"></' + 'script>');
+        }    
+    </script>    
+    <script src="axy-define.js"></script>
+    <script src="plugins.js"></script>
+    <script src="out.js"></script>
+    <script>   
+        var args = [
+            "--source=/src",
+            "--outDir=/out",
+            "--verbose=2",
+            "--allText",
+            "--define=window.sandbox",
+            "--root=/src"
+        ];
+        var sandbox = axy.define.createSandbox();
+        var cmd = "axy /src/load.js " + args.join(" ");
+        document.getElementById("con").appendChild(document.createTextNode(cmd));
+        setStdOut(axy.define, "log");
+        setStdOut(sandbox, "log2");
+        axy.define.require("/src/load.js", {argv: args})(axy.define, sandbox);
+    </script>    
+</body>
+</html>
