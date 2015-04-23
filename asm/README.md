@@ -1,5 +1,7 @@
 # Assembly project in browser
 
+[View example](http://axyjs.github.io/axy-define-examples/asm/)
+
 The project changes the page color to gray.
 
 The project assembled via axy-define-asm from the command line.
